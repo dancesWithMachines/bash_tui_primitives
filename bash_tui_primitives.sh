@@ -1,67 +1,60 @@
 #!/usr/bin/env bash
 
-# bash-tui-primitives.sh
-# version: 0.0.0
+######################################
+# bash-tui-primitives.sh #########
+# version: 0.0.1         #####
+##########################
 
-################################################################################
-# BASE PRIMITIVES AND VARIABLES SECTION                                        #
-# These are obligatory primitives you must include in your script if you are.  #
-# copying only certain functions.                                              #
-################################################################################
+####################
+# VARIABLES #####
+#############
 
 # COLORS
-CLR_DEFAULT=$'\033[0m'
-CLR_RED=$'\033[0;31m'
-CLR_GREEN=$'\033[0;32m'
-CLR_YELLOW=$'\033[1;33m'
-CLR_BLUE=$'\033[0;34m'
-CLR_MAGENTA=$'\033[0;35m'
-CLR_CYAN=$'\033[0;36m'
-CLR_WHITE=$'\033[1;37m'
+TUI_CLR_DEFAULT=$'\033[0m'
+TUI_CLR_RED=$'\033[0;31m'
+TUI_CLR_GREEN=$'\033[0;32m'
+TUI_CLR_YELLOW=$'\033[1;33m'
+TUI_CLR_BLUE=$'\033[0;34m'
+TUI_CLR_MAGENTA=$'\033[0;35m'
+TUI_CLR_CYAN=$'\033[0;36m'
+TUI_CLR_WHITE=$'\033[1;37m'
 
-# ==============================================================================
-# print:  prints text without newline
-# Usage:  tui_print "Hello World" CLR_RED
-#         Second parameter is optional; defaults to CLR_DEFAULT
-# ==============================================================================
-tui_print() {
-  local text="$1"
-  local color="${2:-$CLR_DEFAULT}"
+###################
+# MODIFIERS ####
+#############
 
-  printf "%b" "${color}${text}${CLR_DEFAULT}"
-}
-
-# ==============================================================================
-# println: prints text with newline
-# Usage:   tui_println "Hello World" CLR_GREEN
-#          Second parameter is optional; defaults to CLR_DEFAULT
-# ==============================================================================
-tui_println() {
-  local text="$1"
-  local color="${2:-$CLR_DEFAULT}"
-
-  printf "%b\n" "${color}${text}${CLR_DEFAULT}"
-}
-
-################################################################################
-# EXTRA SETTINGS SECTION                                                       #
-# These are extra settings that allow customization, there are not required    #
-################################################################################
-
-# Global settings (optional - uncomment to use)
-#CAP_WIDTH=80 # Will limit tui components to a certain width.
-
-# Character settings (optional - uncomment and modify to override defaults)
+CAP_WIDTH=80      # Will limit tui components to a certain width.
 #BOX_CHAR="#"      # Default char the box is made of (default: #)
 #SEP_CHAR="-"      # Default char the separator is made of (default: -)
 #PROG_BAR_CHAR="#" # Default char the progress bar is made of (default: #)
 
-################################################################################
-# TUI ELEMENT SECTION                                                          #
-# These section contain various TUI elements. Each element is self-contained   #
-# meaning, you can copy any of them to your script and they should work as     #
-# long as you copied base primitives and variables.
-################################################################################
+###################
+# FUNCTIONS ####
+#############
+
+# ==============================================================================
+# print:  prints text without newline
+# Usage:  tui_print "Hello World" TUI_CLR_RED
+#         Second parameter is optional; defaults to TUI_CLR_DEFAULT
+# ==============================================================================
+tui_print() {
+  local text="$1"
+  local color="${2:-$TUI_CLR_DEFAULT}"
+
+  printf "%b" "${color}${text}${TUI_CLR_DEFAULT}"
+}
+
+# ==============================================================================
+# println: prints text with newline
+# Usage:   tui_println "Hello World" TUI_CLR_GREEN
+#          Second parameter is optional; defaults to TUI_CLR_DEFAULT
+# ==============================================================================
+tui_println() {
+  local text="$1"
+  local color="${2:-$TUI_CLR_DEFAULT}"
+
+  printf "%b\n" "${color}${text}${TUI_CLR_DEFAULT}"
+}
 
 # ==============================================================================
 # print_ok: prints text in green
@@ -70,7 +63,11 @@ tui_println() {
 #           github.com/dancesWithMachines/bash-tui-primitives
 # ==============================================================================
 tui_print_ok() {
-  tui_print "$1" "$CLR_GREEN"
+  local text="$1"
+  local clr_green=$'\033[0;32m'
+  local clr_default=$'\033[0m'
+
+  printf "%b" "${clr_green}${text}${clr_default}"
 }
 
 # ==============================================================================
@@ -78,7 +75,11 @@ tui_print_ok() {
 # Usage:      tui_print_warn "WARN"
 # ==============================================================================
 tui_print_warn() {
-  tui_print "$1" "$CLR_YELLOW"
+  local text="$1"
+  local clr_yellow=$'\033[1;33m'
+  local clr_default=$'\033[0m'
+
+  printf "%b" "${clr_yellow}${text}${clr_default}"
 }
 
 # ==============================================================================
@@ -86,7 +87,11 @@ tui_print_warn() {
 # Usage:     tui_print_err "ERROR"
 # ==============================================================================
 tui_print_err() {
-  tui_print "$1" "$CLR_RED"
+  local text="$1"
+  local clr_red=$'\033[0;31m'
+  local clr_default=$'\033[0m'
+
+  printf "%b" "${clr_red}${text}${clr_default}"
 }
 
 # ==============================================================================
@@ -94,7 +99,11 @@ tui_print_err() {
 # Usage:    tui_println_ok "OK"
 # ==============================================================================
 tui_println_ok() {
-  tui_println "$1" "$CLR_GREEN"
+  local text="$1"
+  local clr_green=$'\033[0;32m'
+  local clr_default=$'\033[0m'
+
+  printf "%b\n" "${clr_green}${text}${clr_default}"
 }
 
 # ==============================================================================
@@ -102,7 +111,11 @@ tui_println_ok() {
 # Usage:    tui_println_warn "WARN"
 # ==============================================================================
 tui_println_warn() {
-  tui_println "$1" "$CLR_YELLOW"
+  local text="$1"
+  local clr_yellow=$'\033[1;33m'
+  local clr_default=$'\033[0m'
+
+  printf "%b\n" "${clr_yellow}${text}${clr_default}"
 }
 
 # ==============================================================================
@@ -110,18 +123,23 @@ tui_println_warn() {
 # Usage:    tui_println_err "ERROR"
 # ==============================================================================
 tui_println_err() {
-  tui_println "$1" "$CLR_RED"
+  local text="$1"
+  local clr_red=$'\033[0;31m'
+  local clr_default=$'\033[0m'
+
+  printf "%b\n" "${clr_red}${text}${clr_default}"
 }
 
 # ==============================================================================
 # box:    prints single-line text inside a colored box
-# Usage:  tui_box "Hello World" CLR_BLUE CLR_WHITE
+# Usage:  tui_box "Hello World" TUI_CLR_BLUE TUI_CLR_WHITE
 # ==============================================================================
 tui_box() {
   local text="$1"
-  local box_color="${2:-$CLR_DEFAULT}"
-  local text_color="${3:-$CLR_DEFAULT}"
+  local box_color="${2:-$'\033[0m'}"
+  local text_color="${3:-$'\033[0m'}"
   local box_char="${BOX_CHAR:-#}"
+  local clr_default=$'\033[0m'
   local term_width max_text_width display_text border
 
   # Determine box width
@@ -139,22 +157,25 @@ tui_box() {
     display_text="${text:0:max_text_width-3}..."
   fi
 
-  border="${box_char}$(printf '%*s' ${#display_text} '' | tr ' ' "${box_char}")${box_char}"
+  border="${box_char}$(printf '%*s' ${#display_text} '' \
+         | tr ' ' "${box_char}")${box_char}"
 
-  printf "%b\n" "${box_color}${border}${CLR_DEFAULT}"
-  printf "%b\n" "${box_color}${box_char}${text_color}${display_text}${box_color}${box_char}${CLR_DEFAULT}"
-  printf "%b\n" "${box_color}${border}${CLR_DEFAULT}"
+  printf "%b\n" "${box_color}${border}${clr_default}"
+  printf "%b\n" "${box_color}${box_char}${text_color}${display_text}${box_color}${box_char}${clr_default}"
+  printf "%b\n" "${box_color}${border}${clr_default}"
 }
 
 # ==============================================================================
 # boxn:   prints multi-line text inside a colored box
-# Usage:  tui_boxn "Hello long world text that wraps nicely" CLR_BLUE CLR_WHITE
+# Usage:  tui_boxn "Hello long world text that wraps nicely" TUI_CLR_BLUE
+#         TUI_CLR_WHITE
 # ==============================================================================
 tui_boxn() {
   local text="$1"
-  local box_color="${2:-$CLR_DEFAULT}"
-  local text_color="${3:-$CLR_DEFAULT}"
+  local box_color="${2:-$'\033[0m'}"
+  local text_color="${3:-$'\033[0m'}"
   local box_char="${BOX_CHAR:-#}"
+  local clr_default=$'\033[0m'
   local term_width max_line_width word line border padded
   local -a words lines
   local max_len=0
@@ -187,23 +208,26 @@ tui_boxn() {
     (( ${#line} > max_len )) && max_len=${#line}
   done
 
-  border="${box_char}$(printf '%*s' "$max_len" '' | tr ' ' "${box_char}")${box_char}"
+  border="${box_char}$(printf '%*s' "$max_len" '' \
+         | tr ' ' "${box_char}")${box_char}"
 
-  printf "%b\n" "${box_color}${border}${CLR_DEFAULT}"
+  printf "%b\n" "${box_color}${border}${clr_default}"
   for line in "${lines[@]}"; do
     padded="$line$(printf '%*s' $((max_len - ${#line})) '')"
-    printf "%b\n" "${box_color}${box_char}${text_color}${padded}${box_color}${box_char}${CLR_DEFAULT}"
+    printf "%b\n" "${box_color}${box_char}${text_color}${padded}${box_color}${box_char}${clr_default}"
   done
-  printf "%b\n" "${box_color}${border}${CLR_DEFAULT}"
+  printf "%b\n" "${box_color}${border}${clr_default}"
 }
+
 
 # ==============================================================================
 # sep: prints a horizontal separator line
-# Usage: tui_sep CLR_BLUE
+# Usage: tui_sep TUI_CLR_BLUE
 # ==============================================================================
 tui_sep() {
-  local color="${1:-$CLR_DEFAULT}"
+  local color="${1:-$'\033[0m'}"
   local sep_char="${SEP_CHAR:--}"
+  local clr_default=$'\033[0m'
   local line_width line
 
   # Determine line width
@@ -214,19 +238,20 @@ tui_sep() {
   fi
 
   line=$(printf '%*s' "$line_width" '' | tr ' ' "$sep_char")
-  tui_println "$line" "$color"
+  printf "%b\n" "${color}${line}${clr_default}"
 }
 
 # ==============================================================================
 # tui_prog_bar: prints a simple progress bar
-# Usage:        tui_prog_bar 3 10 CLR_BLUE CLR_WHITE
+# Usage:        tui_prog_bar 3 10 TUI_CLR_BLUE TUI_CLR_WHITE
 # ==============================================================================
 tui_prog_bar() {
   local current="$1"
   local total="$2"
-  local bar_color="${3:-$CLR_DEFAULT}"
-  local text_color="${4:-$CLR_DEFAULT}"
+  local bar_color="${3:-$'\033[0m'}"
+  local text_color="${4:-$'\033[0m'}"
   local prog_char="${PROG_BAR_CHAR:-#}"
+  local clr_default=$'\033[0m'
   local term_width x_y reserved bar_width filled empty bar_filled bar_empty
 
   # Determine available width
@@ -249,18 +274,19 @@ tui_prog_bar() {
   bar_empty=$(printf '%*s' "$empty" '' | tr ' ' ' ')
 
   printf "\r%b[%b%b] %b%s%b" \
-    "$bar_color" "$bar_filled" "$bar_empty" "$text_color" "$x_y" "$CLR_DEFAULT"
+    "$bar_color" "$bar_filled" "$bar_empty" "$text_color" "$x_y" "$clr_default"
 }
 
 # ==============================================================================
 # tui_spinner: shows a spinner for a background process
-# Usage:       tui_spinner $! "Loading data..." CLR_YELLOW CLR_CYAN
+# Usage:       tui_spinner $! "Loading data..." TUI_CLR_YELLOW TUI_CLR_CYAN
 # ==============================================================================
 tui_spinner() {
   local pid="$1"
   local user_text="${2:-Working...}"
-  local spin_color="${3:-$CLR_DEFAULT}"
-  local text_color="${4:-$CLR_DEFAULT}"
+  local spin_color="${3:-$'\033[0m'}"
+  local text_color="${4:-$'\033[0m'}"
+  local clr_default=$'\033[0m'
   local delay=0.1
   local spinstr='|/-\'
   local i=0
@@ -271,28 +297,31 @@ tui_spinner() {
   while kill -0 "$pid" 2>/dev/null; do
     c="${spinstr:i++%${#spinstr}:1}"
     printf "\r%b[%b%s%b] %b%s%b" \
-      "$spin_color" "$text_color" "$c" "$spin_color" "$text_color" "$user_text" "$CLR_DEFAULT"
+      "$spin_color" "$text_color" "$c" "$spin_color" "$text_color" \
+      "$user_text" "$clr_default"
     sleep "$delay"
   done
 
   printf "\r%b[%b✓%b] %b%s%b\n" \
-    "$spin_color" "$text_color" "$spin_color" "$text_color" "$user_text" "$CLR_DEFAULT"
+    "$spin_color" "$text_color" "$spin_color" "$text_color" "$user_text" \
+    "$clr_default"
 
   tput cnorm 2>/dev/null || true
 }
 
 # ==============================================================================
 # tui_confirm: ask user yes/no question
-# Usage:       tui_confirm "Do you want to continue?" "$CLR_YELLOW"
+# Usage:       tui_confirm "Do you want to continue?" "$TUI_CLR_YELLOW"
 # Returns:     true (yes) or false (no)
 # ==============================================================================
 tui_confirm() {
   local question="$1"
-  local color="${2:-$CLR_DEFAULT}"
+  local color="${2:-$'\033[0m'}"
+  local clr_default=$'\033[0m'
   local answer
 
   while true; do
-    printf "%b [y|n]: " "${color}${question}${CLR_DEFAULT}"
+    printf "%b [y|n]: " "${color}${question}${clr_default}"
     read -r answer
     answer="$(printf '%s' "$answer" | tr '[:upper:]' '[:lower:]')"
 
@@ -306,26 +335,27 @@ tui_confirm() {
 
 # ==============================================================================
 # tui_choose: show a numbered list and ask user to choose
-# Usage:      tui_choose "Select an option:" ARRAY_NAME "$CLR_CYAN"
+# Usage:      tui_choose "Select an option:" ARRAY_NAME "$TUI_CLR_CYAN"
 #             Selected value is stored in 'selected'
 # ==============================================================================
 tui_choose() {
   local prompt="$1"
   local array_name="$2"
-  local color="${3:-$CLR_DEFAULT}"
+  local color="${3:-$'\033[0m'}"
+  local clr_default=$'\033[0m'
   local choice arr_len i
 
   eval "arr_len=\${#${array_name}[@]}"
-  tui_println "${prompt}" "${color}"
+  printf "%b\n" "${color}${prompt}${clr_default}"
 
   i=0
   eval "for item in \"\${${array_name}[@]}\"; do
-          tui_println \" \$((i+1))) \$item\" \"\$color\"
+          printf \"%b\n\" \"${color} \$((i+1))) \$item${clr_default}\"
           i=\$((i+1))
         done"
 
   while true; do
-    tui_print "Enter choice [1-${arr_len}]: " "${color}"
+    printf "%b" "${color}Enter choice [1-${arr_len}]: ${clr_default}"
     read -r choice </dev/tty
 
     if [[ "$choice" =~ ^[0-9]+$ ]] && ((choice >= 1 && choice <= arr_len)); then

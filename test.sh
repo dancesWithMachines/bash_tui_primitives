@@ -23,17 +23,17 @@ echo ""
 
 # Test 3: Colored print
 echo "TEST 3: tui_print with colors"
-tui_print "Red text " "$CLR_RED"
-tui_print "Green text " "$CLR_GREEN"
-tui_print "Blue text" "$CLR_BLUE"
+tui_print "Red text " "$TUI_CLR_RED"
+tui_print "Green text " "$TUI_CLR_GREEN"
+tui_print "Blue text" "$TUI_CLR_BLUE"
 echo ""
 echo ""
 
 # Test 4: Colored println
 echo "TEST 4: tui_println with colors"
-tui_println "Yellow line" "$CLR_YELLOW"
-tui_println "Cyan line" "$CLR_CYAN"
-tui_println "Magenta line" "$CLR_MAGENTA"
+tui_println "Yellow line" "$TUI_CLR_YELLOW"
+tui_println "Cyan line" "$TUI_CLR_CYAN"
+tui_println "Magenta line" "$TUI_CLR_MAGENTA"
 echo ""
 
 # Test 5: OK/WARN/ERR variants
@@ -52,29 +52,29 @@ echo ""
 
 # Test 7: Single-line box
 echo "TEST 7: tui_box (single-line box)"
-tui_box "This is a simple box" "$CLR_BLUE" "$CLR_WHITE"
+tui_box "This is a simple box" "$TUI_CLR_BLUE" "$TUI_CLR_WHITE"
 echo ""
 
 echo "TEST 8: tui_box with different colors"
-tui_box "Success message in a box" "$CLR_GREEN" "$CLR_RED"
+tui_box "Success message in a box" "$TUI_CLR_GREEN" "$TUI_CLR_RED"
 echo ""
 
 # Test 9: Multi-line box
 echo "TEST 9: tui_boxn (multi-line box with text wrapping)"
-tui_boxn "This is a longer text that will wrap into multiple lines inside the box. It demonstrates the tui_boxn function which automatically handles text wrapping based on terminal width." "$CLR_CYAN" "$CLR_WHITE"
+tui_boxn "This is a longer text that will wrap into multiple lines inside the box. It demonstrates the tui_boxn function which automatically handles text wrapping based on terminal width." "$TUI_CLR_CYAN" "$TUI_CLR_WHITE"
 echo ""
 
 # Test 10: Separator
 echo "TEST 10: tui_sep (horizontal separator)"
-tui_sep "$CLR_BLUE"
+tui_sep "$TUI_CLR_BLUE"
 echo "Text between separators"
-tui_sep "$CLR_GREEN"
+tui_sep "$TUI_CLR_GREEN"
 echo ""
 
 # Test 11: Progress bar
 echo "TEST 11: tui_prog_bar (progress bar)"
 for i in {0..10}; do
-  tui_prog_bar $i 10 "$CLR_GREEN" "$CLR_WHITE"
+  tui_prog_bar $i 10 "$TUI_CLR_GREEN" "$TUI_CLR_WHITE"
   sleep 0.2
 done
 echo ""
@@ -83,12 +83,12 @@ echo ""
 # Test 12: Spinner
 echo "TEST 12: tui_spinner (spinner for background process)"
 (sleep 3) &
-tui_spinner $! "Processing data" "$CLR_YELLOW" "$CLR_CYAN"
+tui_spinner $! "Processing data" "$TUI_CLR_YELLOW" "$TUI_CLR_CYAN"
 echo ""
 
 # Test 13: Confirm dialog
 echo "TEST 13: tui_confirm (yes/no question)"
-if tui_confirm "Do you want to continue with the test?" "$CLR_YELLOW"; then
+if tui_confirm "Do you want to continue with the test?" "$TUI_CLR_YELLOW"; then
   tui_println_ok "User selected: YES"
 else
   tui_println_err "User selected: NO"
@@ -98,15 +98,14 @@ echo ""
 # Test 14: Choose from list
 echo "TEST 14: tui_choose (select from list)"
 options=("Option One" "Option Two" "Option Three" "Option Four")
-tui_choose "Please select an option:" options "$CLR_CYAN"
+tui_choose "Please select an option:" options "$TUI_CLR_CYAN"
 tui_println_ok "You selected: $selected"
 echo ""
 
 # Test 15: Combined example
 echo "TEST 15: Combined example - simulated installation"
-tui_sep "$CLR_BLUE"
-tui_boxn "Installation Wizard - This will install the application on your system" "$CLR_BLUE" "$CLR_WHITE"
-tui_sep "$CLR_BLUE"
+tui_sep "$TUI_CLR_BLUE"
+tui_boxn "Installation Wizard - This will install the application on your system" "$TUI_CLR_BLUE" "$TUI_CLR_WHITE"
 
 tui_print "Checking system requirements... "
 sleep 1
@@ -116,19 +115,18 @@ tui_print "Downloading packages... "
 sleep 1
 tui_println_ok "[OK]"
 
-tui_println "Installing components:" "$CLR_CYAN"
+tui_println "Installing components:" "$TUI_CLR_CYAN"
 for i in {1..5}; do
-  tui_prog_bar $i 5 "$CLR_GREEN" "$CLR_WHITE"
+  tui_prog_bar $i 5 "$TUI_CLR_GREEN" "$TUI_CLR_WHITE"
   sleep 0.3
 done
 echo ""
 
 (sleep 2) &
-tui_spinner $! "Configuring system" "$CLR_YELLOW" "$CLR_WHITE"
+tui_spinner $! "Configuring system" "$TUI_CLR_YELLOW" "$TUI_CLR_WHITE"
 
-tui_sep "$CLR_GREEN"
-tui_box "Installation Complete!" "$CLR_GREEN" "$CLR_WHITE"
-tui_sep "$CLR_GREEN"
+tui_box "Installation Complete!" "$TUI_CLR_GREEN" "$TUI_CLR_WHITE"
+tui_sep "$TUI_CLR_GREEN"
 echo ""
 
 echo "=========================================="

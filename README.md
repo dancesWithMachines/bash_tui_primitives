@@ -30,6 +30,19 @@ source /tmp/bash_tui_primitives.sh
 tui_box "Hello World!"
 ```
 
+Here's a bit more robust example. It fetches the script by tag to ensure it always stays the same
+and performs checksum verification.
+
+```bash
+wget -O /tmp/bash_tui_primitives.sh https://raw.githubusercontent.com/dancesWithMachines/bash_tui_primitives/refs/tags/v0.0.1/bash_tui_primitives.sh
+if [ "$(md5sum /tmp/bash_tui_primitives.sh | awk '{print $1}')" != "24ff49d8bc17a18ec30ad41558de0f19" ]; then
+    echo OI
+fi
+source /tmp/bash_tui_primitives.sh
+tui_box "Hello World!"
+
+```
+
 ## Test
 
 Run `test.sh` script for a simple demo.
