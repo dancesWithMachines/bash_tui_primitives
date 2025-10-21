@@ -25,7 +25,7 @@ your codebase, and it should work without any dependencies. You can copy functio
 even load entire set dynamically as shown in following example.
 
 ```bash
-wget -O /tmp/bash_tui_primitives.sh https://raw.githubusercontent.com/dancesWithMachines/bash_tui_primitives/refs/heads/main/bash_tui_primitives.sh
+wget -q -O /tmp/bash_tui_primitives.sh https://raw.githubusercontent.com/dancesWithMachines/bash_tui_primitives/refs/heads/main/bash_tui_primitives.sh
 source /tmp/bash_tui_primitives.sh
 tui_box "Hello World!"
 ```
@@ -34,13 +34,13 @@ Here's a bit more robust example. It fetches the script by tag to ensure it alwa
 and performs checksum verification.
 
 ```bash
-wget -O /tmp/bash_tui_primitives.sh https://raw.githubusercontent.com/dancesWithMachines/bash_tui_primitives/refs/tags/v0.0.1/bash_tui_primitives.sh
+wget -q -O /tmp/bash_tui_primitives.sh https://raw.githubusercontent.com/dancesWithMachines/bash_tui_primitives/refs/tags/v0.0.1/bash_tui_primitives.sh
 if [ "$(md5sum /tmp/bash_tui_primitives.sh | awk '{print $1}')" != "24ff49d8bc17a18ec30ad41558de0f19" ]; then
-    echo OI
+    exit 1
+else
+    source /tmp/bash_tui_primitives.sh
+    tui_box "Hello World!"
 fi
-source /tmp/bash_tui_primitives.sh
-tui_box "Hello World!"
-
 ```
 
 ## Test
