@@ -2,7 +2,7 @@
 
 ######################################
 # bash-tui-primitives.sh #########
-# version: 0.0.1         #####
+# version: 0.0.2         #####
 ##########################
 
 ####################
@@ -23,7 +23,7 @@ TUI_CLR_WHITE=$'\033[1;37m'
 # MODIFIERS ####
 #############
 
-CAP_WIDTH=80      # Will limit tui components to a certain width.
+#CAP_WIDTH=80      # Will limit tui components to a certain width.
 #BOX_CHAR="#"      # Default char the box is made of (default: #)
 #SEP_CHAR="-"      # Default char the separator is made of (default: -)
 #PROG_BAR_CHAR="#" # Default char the progress bar is made of (default: #)
@@ -35,35 +35,35 @@ CAP_WIDTH=80      # Will limit tui components to a certain width.
 # ==============================================================================
 # print:  prints text without newline
 # Usage:  tui_print "Hello World" TUI_CLR_RED
-#         Second parameter is optional; defaults to TUI_CLR_DEFAULT
+#         Second parameter is optional;
 # ==============================================================================
 tui_print() {
   local text="$1"
-  local color="${2:-$TUI_CLR_DEFAULT}"
+  local color="${2:-$'\033[0m'}"
+  local clr_default=$'\033[0m'
 
-  printf "%b" "${color}${text}${TUI_CLR_DEFAULT}"
+  printf "%b" "${color}${text}${clr_default}"
 }
 
 # ==============================================================================
 # println: prints text with newline
 # Usage:   tui_println "Hello World" TUI_CLR_GREEN
-#          Second parameter is optional; defaults to TUI_CLR_DEFAULT
+#          Second parameter is optional;
 # ==============================================================================
 tui_println() {
   local text="$1"
-  local color="${2:-$TUI_CLR_DEFAULT}"
+  local color="${2:-$'\033[0m'}"
+  local clr_default=$'\033[0m'
 
-  printf "%b\n" "${color}${text}${TUI_CLR_DEFAULT}"
+  printf "%b\n" "${color}${text}${clr_default}"
 }
 
 # ==============================================================================
-# print_ok: prints text in green
-# Usage:    tui_print_ok "OK"
-# Source:   bash-tui-primitives by Timax
-#           github.com/dancesWithMachines/bash-tui-primitives
+# print_ok: prints text in green, or "OK" in green if no param
+# Usage:    tui_print_ok "Text in green"
 # ==============================================================================
 tui_print_ok() {
-  local text="$1"
+  local text="${1:-OK}"
   local clr_green=$'\033[0;32m'
   local clr_default=$'\033[0m'
 
@@ -71,11 +71,11 @@ tui_print_ok() {
 }
 
 # ==============================================================================
-# print_warn: prints text in yellow
-# Usage:      tui_print_warn "WARN"
+# print_warn: prints text in yellow, or "WARNING" in yellow if no param
+# Usage:      tui_print_warn "Text in yellow"
 # ==============================================================================
 tui_print_warn() {
-  local text="$1"
+  local text="${1:-WARNING}"
   local clr_yellow=$'\033[1;33m'
   local clr_default=$'\033[0m'
 
@@ -83,11 +83,11 @@ tui_print_warn() {
 }
 
 # ==============================================================================
-# print_err: prints text in red
-# Usage:     tui_print_err "ERROR"
+# print_err: prints text in red, or "ERROR" in red if no param
+# Usage:     tui_print_err "Text in red"
 # ==============================================================================
 tui_print_err() {
-  local text="$1"
+  local text="${1:-ERROR}"
   local clr_red=$'\033[0;31m'
   local clr_default=$'\033[0m'
 
@@ -95,11 +95,11 @@ tui_print_err() {
 }
 
 # ==============================================================================
-# println_ok: prints text in green with newline
-# Usage:    tui_println_ok "OK"
+# println_ok: prints text in green with newline, or "OK" in green if no param
+# Usage:      tui_println_ok "Text in green"
 # ==============================================================================
 tui_println_ok() {
-  local text="$1"
+  local text="${1:-OK}"
   local clr_green=$'\033[0;32m'
   local clr_default=$'\033[0m'
 
@@ -107,11 +107,12 @@ tui_println_ok() {
 }
 
 # ==============================================================================
-# println_warn: prints text in yellow with newline
-# Usage:    tui_println_warn "WARN"
+# println_warn: prints text in yellow with newline, , or "WARNING" in yellow if
+#               no param
+# Usage:        tui_println_warn "Text in yellow"
 # ==============================================================================
 tui_println_warn() {
-  local text="$1"
+  local text="${1:-WARNING}"
   local clr_yellow=$'\033[1;33m'
   local clr_default=$'\033[0m'
 
@@ -119,11 +120,11 @@ tui_println_warn() {
 }
 
 # ==============================================================================
-# println_err: prints text in red with newline
-# Usage:    tui_println_err "ERROR"
+# println_err: prints text in red with newline, , or "ERROR" in red if no param
+# Usage:       tui_println_err "Text in red"
 # ==============================================================================
 tui_println_err() {
-  local text="$1"
+  local text="${1:-ERROR}"
   local clr_red=$'\033[0;31m'
   local clr_default=$'\033[0m'
 
